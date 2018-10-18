@@ -18,7 +18,7 @@ print_help() {
 
 get_update()
 {
-    sudo apt-get update
+    sudo apt-get -y update
 }
 
 
@@ -113,7 +113,7 @@ fi
 
 # Installing npm
 if ! [ -x "$(command -v curl)" ]; then
-    apt-get install npm
+    apt-get install -y npm
 fi
 
 # **********************************************************
@@ -122,7 +122,7 @@ fi
 
 echo -e "\033[32mInstalling nginx"
 # get_update
-apt-get install nginx
+apt-get install -y nginx
 echo y | command
 
 ufw app list
@@ -141,7 +141,7 @@ systemctl enable nginx
 get_update
 
 echo -e "\033[32mInstalling redis-server"
-apt-get install redis-server
+apt-get install -y redis-server
 
 # Closing and starting the server if already started
 systemctl restart redis-server.servic e
@@ -181,7 +181,7 @@ add-apt-repository -y ppa:ethereum/ethereum
 
 get_update
 
-apt-get install ethereum
+apt-get install -y ethereum
 
 if [ "$1" == "--create" ]; then
     geth account new
