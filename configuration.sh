@@ -7,7 +7,13 @@ git clone https://github.com/sammy007/open-ethereum-pool.git
 
 echo -e "\033[32mMake can time as it will download the packages\n"
 sudo chmod -R 777 .
-cd open-ethereum-pool && make
+
+cd open-ethereum-pool
+export GOROOT=$HOME/.go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+make
 # This is the config file
 
 echo -e "{
@@ -17,7 +23,7 @@ echo -e "{
 
 	\"proxy\": {
 		\"enabled\": true,
-		\"listen\": \"0.0.0.0:8888\",
+		\"listen\": \"142.93.229.201:8888\",
 		\"limitHeadersSize\": 1024,
 		\"limitBodySize\": 256,
 		\"behindReverseProxy\": false,
@@ -31,7 +37,7 @@ echo -e "{
 
 		\"stratum\": {
 			\"enabled\": true,
-			\"listen\": \"0.0.0.0:8008\",
+			\"listen\": \"142.93.229.201:8008\",
 			\"timeout\": \"120s\",
 			\"maxConn\": 8192
 		},
@@ -62,7 +68,7 @@ echo -e "{
 		\"enabled\": true,
 		\"purgeOnly\": false,
 		\"purgeInterval\": \"10m\",
-		\"listen\": \"0.0.0.0:8080\",
+		\"listen\": \"142.93.229.201:8080\",
 		\"statsCollectInterval\": \"5s\",
 		\"hashrateWindow\": \"30m\",
 		\"hashrateLargeWindow\": \"3h\",
