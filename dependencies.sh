@@ -77,6 +77,7 @@ else
     } >> "$HOME/.${shell_profile}"
     
     mkdir -p $HOME/go/{src,pkg,bin}
+    source $HOME/.${shell_profile}
     echo -e "\nGo $VERSION was installed.\nMake sure to relogin into your shell or run:"
     echo -e "\n\tsource $HOME/.${shell_profile}\n\nto update your environment variables."
     echo "Tip: Opening a new terminal window usually just works. :)"
@@ -191,7 +192,7 @@ echo -e '\033[1;92mMaking a geth service'
 echo "[Unit]
 Description=Ethereum Go Client
 [Service]
-ExecStart=/usr/bin/geth --fast --cache=16 --datadir=/mnt/eth-blockchain --identity=@bkawk --keystore=/mnt/eth-blockchain --rpc --rpcport=8882 --rpccorsdomain=* --rpcapi=web3,db,net,eth
+ExecStart=/usr/bin/geth --syncmode="fast" --cache=512 --datadir=/home/eth-blockchain --identity=@heavy --keystore=/home/eth-blockchain --rpc --rpcport=8882 --rpccorsdomain=* --rpcapi=web3,db,net,eth
 Restart=always
 RestartSec=30
 Type=simple
@@ -206,7 +207,7 @@ systemctl enable geth.service
 
 
 echo -e '\033[1;92mStarting geth'
-screen geth --rpc --fast #syncing
+screen geth --syncmode="fast" --cache=512 --datadir=/home/eth-blockchain --identity=@heavy --keystore=/home/eth-blockchain --rpc --rpcport=8882 --rpccorsdomain=* --rpcapi=web3,db,net,eth #syncing
 
 
 
